@@ -1,24 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Add mobile menu button (hamburger)
+    // Initialize elements
     const nav = document.querySelector('header nav');
-    const hamburger = document.createElement('div');
-    hamburger.className = 'hamburger';
-    hamburger.innerHTML = `
-        <span></span>
-        <span></span>
-        <span></span>
-    `;
-    nav.appendChild(hamburger);
-
-    // Mobile menu toggle
     const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
-        
-        // Animate hamburger
-        const spans = this.getElementsByTagName('span');
-        this.classList.toggle('active');
-        if (this.classList.contains('active')) {
+    const productGrid = document.getElementById('productGrid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    
+    // Add hamburger menu
+    const createHamburger = () => {
+        const hamburger = document.createElement('div');
+        hamburger.className = 'hamburger';
+        hamburger.innerHTML = `<span></span><span></span><span></span>`;
+        nav.appendChild(hamburger);
+        return hamburger;
+    };
+    
+    const hamburger = createHamburger();
+    
+    // Hamburger animation functions
+    const toggleHamburger = (isActive) => {
+        const spans = hamburger.getElementsByTagName('span');
+        if (isActive) {
             spans[0].style.transform = 'rotate(-45deg) translate(-6px, 6px)';
             spans[1].style.opacity = '0';
             spans[2].style.transform = 'rotate(45deg) translate(-6px, -6px)';
@@ -27,72 +28,48 @@ document.addEventListener('DOMContentLoaded', () => {
             spans[1].style.opacity = '1';
             spans[2].style.transform = 'none';
         }
+    };
+    
+    const resetMobileMenu = () => {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+        toggleHamburger(false);
+    };
+
+    // Mobile menu handlers
+    hamburger.addEventListener('click', function() {
+        const isActive = !this.classList.contains('active');
+        this.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        toggleHamburger(isActive);
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
-            const spans = hamburger.getElementsByTagName('span');
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
+            resetMobileMenu();
         }
     });
 
-    // Handle window resize
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            if (window.innerWidth > 768) {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
-                const spans = hamburger.getElementsByTagName('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
-        }, 250);
-    });
-
-    // Add touch support for product cards
-    const addTouchSupport = () => {
-        const cards = document.querySelectorAll('.product-card');
-        cards.forEach(card => {
-            card.addEventListener('touchstart', () => {
-                card.style.transform = 'scale(0.98)';
-            });
-            card.addEventListener('touchend', () => {
-                card.style.transform = 'scale(1)';
-            });
-        });
+    // Debounced window resize handler
+    const debounce = (func, wait) => {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
     };
 
-    // Navigation active state
-    const navLinksItems = document.querySelectorAll('.nav-links a');
-    navLinksItems.forEach(link => {
-        link.addEventListener('click', (e) => {
-            navLinksItems.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            
-            // Close mobile menu after clicking a link
-            if (window.innerWidth <= 768) {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
-                const spans = hamburger.getElementsByTagName('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
-        });
-    });
+    window.addEventListener('resize', debounce(() => {
+        if (window.innerWidth > 768) {
+            resetMobileMenu();
+        }
+    }, 250));
 
-    // Initialize touch support
-    addTouchSupport();
-
-    // Sample product data
+    // Product data
     const products = [
         {
             id: 1,
@@ -144,79 +121,107 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    const productGrid = document.getElementById('productGrid');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-
-    // Create product card
-    function createProductCard(product) {
-        return `
-            <div class="product-card" data-category="${product.category}">
-                <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}">
-                </div>
-                <div class="product-info">
-                    <h3>${product.name}</h3>
-                    <p>${product.description}</p>
-                    <div class="product-price">${product.price}</div>
-                    <a href="#" class="product-button">Learn More</a>
-                </div>
+    // Product card creation and display
+    const createProductCard = (product) => `
+        <div class="product-card" data-category="${product.category}">
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}" loading="lazy">
             </div>
-        `;
-    }
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <div class="product-price">${product.price}</div>
+                <a href="#" class="product-button">Learn More</a>
+            </div>
+        </div>
+    `;
 
-    // Display all products
-    function displayProducts(category = 'all') {
+    const animateCards = () => {
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    card.style.transition = 'all 0.3s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 50);
+            });
+        });
+    };
+
+    const displayProducts = (category = 'all') => {
         const filteredProducts = category === 'all' 
             ? products 
             : products.filter(product => product.category === category);
         
         productGrid.innerHTML = filteredProducts
-            .map(product => createProductCard(product))
+            .map(createProductCard)
             .join('');
 
-        // Reinitialize touch support after displaying new products
-        addTouchSupport();
-    }
+        animateCards();
+        initializeTouchHandlers();
+    };
 
-    // Filter button click handlers
+    // Touch handlers for mobile
+    const initializeTouchHandlers = () => {
+        const cards = document.querySelectorAll('.product-card');
+        const touchHandler = (card, scale) => {
+            if (window.matchMedia('(hover: none)').matches) {
+                card.style.transform = `scale(${scale})`;
+            }
+        };
+
+        cards.forEach(card => {
+            card.addEventListener('touchstart', () => touchHandler(card, 0.98));
+            card.addEventListener('touchend', () => touchHandler(card, 1));
+            card.addEventListener('touchcancel', () => touchHandler(card, 1));
+        });
+    };
+
+    // Filter handlers
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // Update active button state
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
+            displayProducts(button.dataset.category);
+        });
+    });
 
-            // Filter products
-            const category = button.dataset.category;
-            displayProducts(category);
-
-            // Add animation to new cards
-            const cards = document.querySelectorAll('.product-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.transition = 'all 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
+    // Navigation active state
+    const handleNavigation = () => {
+        const navLinksItems = document.querySelectorAll('.nav-links a');
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinksItems.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                if (window.innerWidth <= 768) {
+                    resetMobileMenu();
+                }
             });
         });
-    });
+    };
 
-    // Initialize product display
-    displayProducts();
-
-    // Add smooth scroll for navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+    // Smooth scroll
+    const initSmoothScroll = () => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
-    });
+    };
+
+    // Initialize
+    handleNavigation();
+    initSmoothScroll();
+    displayProducts();
 });

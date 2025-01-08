@@ -310,3 +310,275 @@
         display: block;
     }
 }
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header Styles */
+  .main-header {
+    background-color: #003366;
+    padding: 20px 0;
+    position: relative;
+  }
+  
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo-link .sony-logo {
+    height: 30px;
+  }
+  
+  .hamburger {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .nav-links li {
+    margin-left: 20px;
+  }
+  
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #ccc;
+  }
+  
+  .nav-links a.active {
+    font-weight: bold;
+  }
+  
+  /* Breadcrumb Styles */
+  .breadcrumb {
+    background-color: #f2f2f2;
+    padding: 10px 0;
+  }
+  
+  .breadcrumb-link {
+    color: #003366;
+    text-decoration: none;
+  }
+  
+  .breadcrumb-separator {
+    margin: 0 5px;
+    color: #999;
+  }
+  
+  .breadcrumb-current {
+    color: #666;
+  }
+  
+  /* Contact Header Styles */
+  .contact-header {
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .contact-header h1 {
+    color: #003366;
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  
+  .contact-header p {
+    color: #666;
+    font-size: 18px;
+  }
+  
+  /* Contact Sections Styles */
+  .contact-sections {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  
+  .contact-box {
+    background-color: #f2f2f2;
+    padding: 30px;
+    margin: 0 20px;
+    text-align: center;
+    width: 300px;
+  }
+  
+  .contact-box-icon img {
+    height: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .contact-box h3 {
+    color: #003366;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .contact-box p {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .contact-box-link {
+    color: #003366;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .contact-box-link:hover {
+    color: #004d99;
+  }
+  
+  /* Contact Form Styles */
+  .contact-form {
+    max-width: 600px;
+    margin: 0 auto 40px;
+  }
+  
+  .contact-form h2 {
+    color: #003366;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    color: #666;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .submit-btn {
+    background-color: #003366;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #004d99;
+  }
+  
+  .required-fields {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .success-message {
+    display: none;
+    color: #008000;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  /* Footer Styles */
+  .main-footer {
+    background-color: #000000;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Mobile Menu Styles */
+  @media (max-width: 768px) {
+    .nav-links {
+      position: absolute;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background-color: #000000;
+      padding: 20px;
+      box-sizing: border-box;
+      z-index: 1;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .nav-links.active {
+      display: flex;
+    }
+  
+    .nav-links li {
+      margin: 10px 0;
+    }
+  
+    .hamburger {
+      display: block;
+    }
+  
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(-45deg) translate(-6px, 6px);
+    }
+  
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+  
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(45deg) translate(-6px, -6px);
+    }
+  
+    .contact-sections {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .contact-box {
+      margin: 20px 0;
+    }
+  }
+  
