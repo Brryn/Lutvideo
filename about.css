@@ -1,0 +1,235 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-color: #000000;
+    color: #fff;
+}
+
+/* Header Styles */
+.main-header {
+    background-color: #000000;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.main-nav {
+    padding: 15px 50px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo img {
+    height: 25px;
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: #0078d4;
+}
+
+.nav-tools .search-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Slide Container */
+.slide-container {
+    margin-top: 60px;
+}
+
+.slide {
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    padding: 80px 50px;
+    background: linear-gradient(to right, #000, #1a1a1a);
+    min-height: calc(100vh - 60px);
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+    padding-right: 50px;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+.hero-content p {
+    font-size: 18px;
+    color: #ccc;
+    margin-bottom: 40px;
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tabs Section */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: #1a1a1a;
+}
+
+.tab {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.tab.active {
+    color: #0078d4;
+    border-bottom: 2px solid #0078d4;
+}
+
+/* Content Section */
+.content {
+    display: flex;
+    padding: 50px;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.image {
+    flex: 1;
+}
+
+.image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.text {
+    flex: 1;
+    padding: 20px;
+}
+
+.text h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.text p {
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* Info Section */
+.info {
+    padding: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.info h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    background: #1a1a1a;
+    padding: 20px;
+    text-align: center;
+}
+
+footer ul {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #0078d4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-nav {
+        padding: 15px 20px;
+    }
+
+    .nav-links {
+        gap: 20px;
+    }
+
+    .hero {
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+
+    .content {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .hero-content {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+}

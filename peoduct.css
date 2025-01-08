@@ -1,0 +1,150 @@
+/* Product Page Specific Styles */
+.product-hero {
+    background: linear-gradient(to right, #000, #1a1a1a);
+    padding: 120px 50px 80px;
+    text-align: center;
+    color: #fff;
+    margin-top: 60px;
+}
+
+.product-hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.product-hero p {
+    font-size: 20px;
+    color: #ccc;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Product Filters */
+.product-filters {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 20px;
+    background: #f5f5f5;
+}
+
+.filter-btn {
+    padding: 10px 25px;
+    border: none;
+    background: none;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.filter-btn:hover {
+    color: #0078d4;
+}
+
+.filter-btn.active {
+    color: #0078d4;
+    border-bottom-color: #0078d4;
+}
+
+/* Products Grid */
+.products-grid {
+    padding: 40px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 40px 0;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.product-info p {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0078d4;
+    margin-bottom: 15px;
+}
+
+.product-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0078d4;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.product-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-hero {
+        padding: 100px 20px 60px;
+    }
+
+    .product-hero h1 {
+        font-size: 36px;
+    }
+
+    .product-filters {
+        flex-wrap: wrap;
+    }
+
+    .products-grid {
+        padding: 20px;
+    }
+
+    .product-cards {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+}

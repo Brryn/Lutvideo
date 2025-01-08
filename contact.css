@@ -1,0 +1,264 @@
+:root {
+    --sony-blue: #000000;
+    --sony-light-blue: #0066cc;
+    --sony-gray: #666666;
+    --sony-light-gray: #f4f4f4;
+    --sony-border: #e0e0e0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: SSTPro, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: var(--sony-gray);
+    line-height: 1.6;
+}
+
+.main-header {
+    background-color: #000000;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo-link {
+    display: inline-block;
+}
+
+.sony-logo {
+    height: 24px;
+    transition: opacity 0.3s ease;
+}
+
+.sony-logo:hover {
+    opacity: 0.8;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.breadcrumb {
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-link {
+    color: var(--sony-light-blue);
+    text-decoration: none;
+}
+
+.breadcrumb-separator {
+    margin: 0 0.5rem;
+    color: var(--sony-gray);
+}
+
+.breadcrumb-current {
+    color: var(--sony-gray);
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.contact-header h1 {
+    font-size: 2.5rem;
+    color: var(--sony-blue);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.contact-header p {
+    font-size: 1.2rem;
+    color: var(--sony-gray);
+}
+
+.contact-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.contact-box {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--sony-border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.contact-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.contact-box-icon {
+    margin-bottom: 1.5rem;
+}
+
+.contact-box-icon img {
+    width: 48px;
+    height: 48px;
+}
+
+.contact-box h3 {
+    color: var(--sony-blue);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.contact-box p {
+    margin-bottom: 1rem;
+}
+
+.contact-box-link {
+    display: inline-block;
+    color: var(--sony-light-blue);
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 1rem;
+}
+
+.contact-box-link:hover {
+    text-decoration: underline;
+}
+
+.contact-form {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--sony-border);
+}
+
+.contact-form h2 {
+    color: var(--sony-blue);
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--sony-blue);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--sony-border);
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--sony-light-blue);
+    outline: none;
+}
+
+.form-group textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.submit-btn {
+    background-color: var(--sony-light-blue);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #005bb8;
+}
+
+.required-fields {
+    color: var(--sony-gray);
+    font-size: 0.9rem;
+}
+
+.success-message {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.main-footer {
+    background-color: var(--sony-light-gray);
+    padding: 2rem 0;
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .contact-header h1 {
+        font-size: 2rem;
+    }
+    
+    .contact-sections {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-form {
+        padding: 1.5rem;
+    }
+    
+    .form-footer {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .submit-btn {
+        width: 100%;
+    }
+}
