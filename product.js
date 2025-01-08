@@ -1,4 +1,97 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Add mobile menu button (hamburger)
+    const nav = document.querySelector('header nav');
+    const hamburger = document.createElement('div');
+    hamburger.className = 'hamburger';
+    hamburger.innerHTML = `
+        <span></span>
+        <span></span>
+        <span></span>
+    `;
+    nav.appendChild(hamburger);
+
+    // Mobile menu toggle
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        
+        // Animate hamburger
+        const spans = this.getElementsByTagName('span');
+        this.classList.toggle('active');
+        if (this.classList.contains('active')) {
+            spans[0].style.transform = 'rotate(-45deg) translate(-6px, 6px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(45deg) translate(-6px, -6px)';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+            const spans = hamburger.getElementsByTagName('span');
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    });
+
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.innerWidth > 768) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+                const spans = hamburger.getElementsByTagName('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        }, 250);
+    });
+
+    // Add touch support for product cards
+    const addTouchSupport = () => {
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('touchend', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    };
+
+    // Navigation active state
+    const navLinksItems = document.querySelectorAll('.nav-links a');
+    navLinksItems.forEach(link => {
+        link.addEventListener('click', (e) => {
+            navLinksItems.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            // Close mobile menu after clicking a link
+            if (window.innerWidth <= 768) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+                const spans = hamburger.getElementsByTagName('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+    });
+
+    // Initialize touch support
+    addTouchSupport();
+
     // Sample product data
     const products = [
         {
@@ -80,6 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
         productGrid.innerHTML = filteredProducts
             .map(product => createProductCard(product))
             .join('');
+
+        // Reinitialize touch support after displaying new products
+        addTouchSupport();
     }
 
     // Filter button click handlers

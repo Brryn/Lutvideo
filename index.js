@@ -1,5 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Slider functionality
+    // Mobile Navigation Setup
+    const nav = document.querySelector('nav');
+    const hamburger = document.createElement('div');
+    hamburger.className = 'hamburger';
+    hamburger.innerHTML = `
+        <span></span>
+        <span></span>
+        <span></span>
+    `;
+    nav.appendChild(hamburger);
+
+    const navLinks = document.querySelector('.nav-links');
+    
+    // Mobile menu toggle
+    hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        
+        // Animate hamburger
+        const spans = this.getElementsByTagName('span');
+        this.classList.toggle('active');
+        if (this.classList.contains('active')) {
+            spans[0].style.transform = 'rotate(-45deg) translate(-6px, 6px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(45deg) translate(-6px, -6px)';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+            const spans = hamburger.getElementsByTagName('span');
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    });
+
+    // Existing Slider functionality
     const slider = document.querySelector('.slider');
     const slides = document.querySelectorAll('.slide');
     const prevButton = document.querySelector('.prev');
@@ -61,11 +104,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Navigation active state
-    const navLinks = document.querySelectorAll('.nav-links a');
-    navLinks.forEach(link => {
+    const navLinksItems = document.querySelectorAll('.nav-links a');
+    navLinksItems.forEach(link => {
         link.addEventListener('click', (e) => {
-            navLinks.forEach(l => l.classList.remove('active'));
+            navLinksItems.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
+            
+            // Close mobile menu after clicking a link
+            if (window.innerWidth <= 768) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+                const spans = hamburger.getElementsByTagName('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
         });
     });
 
@@ -98,5 +151,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+            const spans = hamburger.getElementsByTagName('span');
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
     });
 });

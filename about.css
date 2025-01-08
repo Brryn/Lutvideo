@@ -233,3 +233,110 @@ footer a:hover {
         margin-bottom: 40px;
     }
 }
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+/* Enhanced Mobile Styles */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .nav-container {
+        position: relative;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: #000000;
+        padding: 20px;
+        gap: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .tabs {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .tab {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .content {
+        gap: 30px;
+    }
+
+    .text h1 {
+        font-size: 28px;
+    }
+
+    .info {
+        padding: 30px 20px;
+    }
+
+    .info h2 {
+        font-size: 26px;
+    }
+
+    footer ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Smooth transitions for mobile menu */
+    .nav-links {
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Touch-friendly hover states */
+    .nav-links li a:active,
+    .tab:active,
+    footer a:active {
+        opacity: 0.7;
+    }
+}
+
+/* Additional animation classes */
+.slide-in {
+    animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,60 +1,87 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Form handling
-    const contactForm = document.getElementById('contactForm');
-    const successMessage = document.getElementById('successMessage');
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxfulDQp3g2EOy7hrWFJcNExRfOj2aMdYS0FhEkZw8Kexw5rFIfiMcs23GUn1cvc4T94w/exec';
+    const form = document.forms['Lut-contact-form'];
+    const btnKirim = document.querySelector('.btn-kirim');
+    const btnLoading = document.querySelector('.btn-loading');
+    const alertSuccess = document.querySelector('.alert-success');
+    const inputs = form.querySelectorAll('input, textarea');
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
+    // Handle input validation and mobile keyboard
+    inputs.forEach(input => {
+        // Prevent zoom on focus for iOS devices
+        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            input.style.fontSize = '16px';
+        }
 
-            // Get form values
-            const formData = {
-                name: document.getElementById('name').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                phone: document.getElementById('phone').value.trim(),
-                subject: document.getElementById('subject').value.trim(),
-                message: document.getElementById('message').value.trim()
-            };
+        // Handle input validation
+        input.addEventListener('blur', function() {
+            validateInput(this);
+        });
 
-            // Validate email
-            if (!isValidEmail(formData.email)) {
-                showError('Please enter a valid email address');
-                return;
-            }
+        // Clear error state on focus
+        input.addEventListener('focus', function() {
+            this.style.borderColor = '';
+        });
+    });
 
-            // Validate phone if provided
-            if (formData.phone && !isValidPhone(formData.phone)) {
-                showError('Please enter a valid phone number');
-                return;
-            }
+    // Form submission
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-            try {
-                // Send form data to server
-                const response = await fetch('/submit-form', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                // Show success message
-                successMessage.style.display = 'block';
-                contactForm.reset();
-
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 5000);
-            } catch (error) {
-                console.error('Error:', error);
-                showError('Sorry, there was an error saving your submission. Please try again later.');
+        // Validate all fields before submission
+        let isValid = true;
+        inputs.forEach(input => {
+            if (!validateInput(input)) {
+                isValid = false;
             }
         });
+
+        if (!isValid) {
+            return;
+        }
+
+        // Show loading state
+        btnKirim.style.display = 'none';
+        btnLoading.style.display = 'inline-flex';
+        
+        try {
+            const response = await fetch(scriptURL, {
+                method: 'POST',
+                body: new FormData(form)
+            });
+            
+            if (response.ok) {
+                form.reset();
+                showSuccessMessage();
+            }
+        } catch (error) {
+            console.error('Error!', error.message);
+            showErrorMessage();
+        } finally {
+            btnLoading.style.display = 'none';
+            btnKirim.style.display = 'inline-flex';
+        }
+    });
+
+    // Input validation function
+    function validateInput(input) {
+        if (input.required && !input.value.trim()) {
+            input.style.borderColor = '#ff0000';
+            return false;
+        }
+
+        if (input.type === 'email' && input.value.trim() && !isValidEmail(input.value)) {
+            input.style.borderColor = '#ff0000';
+            return false;
+        }
+
+        if (input.type === 'tel' && input.value.trim() && !isValidPhone(input.value)) {
+            input.style.borderColor = '#ff0000';
+            return false;
+        }
+
+        input.style.borderColor = '';
+        return true;
     }
 
     function isValidEmail(email) {
@@ -67,23 +94,41 @@ document.addEventListener('DOMContentLoaded', function() {
         return phoneRegex.test(phone);
     }
 
-    function showError(message) {
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message';
-        errorDiv.textContent = message;
-
-        // Remove any existing error message
-        const existingError = document.querySelector('.error-message');
-        if (existingError) {
-            existingError.remove();
+    function showSuccessMessage() {
+        alertSuccess.style.display = 'block';
+        // Position the alert for better mobile visibility
+        if (window.innerWidth <= 768) {
+            alertSuccess.style.position = 'fixed';
+            alertSuccess.style.top = '20px';
+            alertSuccess.style.left = '50%';
+            alertSuccess.style.transform = 'translateX(-50%)';
+            alertSuccess.style.width = '90%';
+            alertSuccess.style.zIndex = '1000';
         }
-
-        // Add new error message
-        contactForm.appendChild(errorDiv);
-
-        // Remove error message after 3 seconds
         setTimeout(() => {
-            errorDiv.remove();
+            alertSuccess.style.display = 'none';
         }, 3000);
     }
+
+    function showErrorMessage() {
+        // You can implement error message display here
+        alert('An error occurred. Please try again.');
+    }
+
+    // Handle mobile viewport height issues
+    function handleMobileViewport() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    // Call on load and resize
+    handleMobileViewport();
+    window.addEventListener('resize', handleMobileViewport);
+
+    // Prevent form submission on enter key for mobile
+    form.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+        }
+    });
 });
