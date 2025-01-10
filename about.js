@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Navigation Links
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.classList.remove('active');
-        if (link.textContent.trim() === 'Technology') {
+        if (link.textContent.trim() === 'Teknologi') {
             link.classList.add('active');
         }
 

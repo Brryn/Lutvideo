@@ -581,4 +581,32 @@ body {
       margin: 20px 0;
     }
   }
+ /* Add these styles to your existing CSS */
+.product-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: space-between;
+}
+
+.product-button {
+    flex: 1;
+    text-align: center;
+}
+
+.download-button {
+    flex: 1;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .product-buttons {
+        flex-direction: column;
+    }
+    
+    .download-button {
+        margin-top: 8px;
+    }
+} 
+
   

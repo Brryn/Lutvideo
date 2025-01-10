@@ -73,49 +73,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const products = [
         {
             id: 1,
-            name: "Cinema LUT Package Pro",
-            description: "Professional cinematic looks for high-end production",
-            price: "FREE",
+            name: "Paket LUT Sinema Pro",
+            description: "Tampilan sinematik profesional untuk produksi kelas atas",
+            price: "GRATIS",
             category: "cinema",
             image: "cine.jpg"
         },
         {
             id: 2,
-            name: "Broadcast LUT Essential",
-            description: "Standard broadcast-ready LUT package",
-            price: "FREE",
+            name: "LUT Siaran Esensial",
+            description: "Paket LUT siap siaran standar",
+            price: "GRATIS",
             category: "broadcast",
             image: "tone.jpg"
         },
         {
             id: 3,
-            name: "S-Log3 to Rec.709",
-            description: "Technical LUT for S-Log3 conversion",
-            price: "FREE",
+            name: "S-Log3 ke Rec.709",
+            description: "LUT teknis untuk konversi S-Log3",
+            price: "GRATIS",
             category: "slog",
             image: "slog3.jpg"
         },
         {
             id: 4,
-            name: "Film Emulation Pack",
-            description: "Classic film stock emulation LUTs",
-            price: "FREE",
+            name: "Paket Emulasi Film",
+            description: "LUT emulasi stok film klasik",
+            price: "GRATIS",
             category: "cinema",
             image: "apaini.jpg"
         },
         {
             id: 5,
-            name: "Live Production Suite",
-            description: "Real-time LUTs for live broadcasting",
-            price: "FREE",
+            name: "Paket Produksi Langsung",
+            description: "LUT waktu-nyata untuk siaran langsung",
+            price: "GRATIS",
             category: "broadcast",
             image: "live.jpg"
         },
         {
             id: 6,
-            name: "S-Log2 Creative Pack",
-            description: "Creative looks for S-Log2 footage",
-            price: "FREE",
+            name: "Paket Kreatif S-Log2",
+            description: "Tampilan kreatif untuk footage S-Log2",
+            price: "GRATIS",
             category: "slog",
             image: "slog2.jpg"
         }
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3>${product.name}</h3>
                 <p>${product.description}</p>
                 <div class="product-price">${product.price}</div>
-                <a href="#" class="product-button">Learn More</a>
+                <a href="https://drive.google.com/file/d/1H613ZJsKk9AtRBxdRThWneXtkiyD-tbf/view?usp=drive_link" class="product-button">DOWNLOAD</a>
             </div>
         </div>
     `;
