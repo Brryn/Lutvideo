@@ -1,4 +1,4 @@
-/* Product Page Specific Styles */
+/* model halaman produk */
 .product-hero {
     background: linear-gradient(to right, #000, #1a1a1a);
     padding: 120px 50px 80px;
@@ -19,7 +19,7 @@
     margin: 0 auto;
 }
 
-/* Product Filters */
+/* filter untuk produk */
 .product-filters {
     display: flex;
     justify-content: center;
@@ -48,7 +48,7 @@
     border-bottom-color: #0078d4;
 }
 
-/* Products Grid */
+/* garis batas untuk produk */
 .products-grid {
     padding: 40px 50px;
     max-width: 1200px;
@@ -125,7 +125,7 @@
     background-color: #0056b3;
 }
 
-/* Responsive Design */
+/* respon model  */
 @media (max-width: 768px) {
     .product-hero {
         padding: 100px 20px 60px;
@@ -148,7 +148,7 @@
         gap: 20px;
     }
 }
-/* Additional Mobile Responsive Styles */
+/* bentuk dlam model mobile */
 @media (max-width: 480px) {
     /* Header & Navigation */
     header {
@@ -156,7 +156,7 @@
     }
 
     .nav-links {
-        display: none; /* Hide default nav */
+        display: none; /* menyembunyikan model default navbar */
         position: fixed;
         top: 60px;
         left: 0;
@@ -184,7 +184,7 @@
         z-index: 100;
     }
 
-    /* Product Hero Section */
+    /* produk hero  */
     .product-hero {
         padding: 80px 15px 40px;
     }
@@ -197,7 +197,7 @@
         font-size: 16px;
     }
 
-    /* Product Filters */
+    /* Product Filter */
     .product-filters {
         padding: 20px 10px;
         gap: 10px;
@@ -211,7 +211,7 @@
         text-align: center;
     }
 
-    /* Product Cards */
+    /* Product kartu*/
     .products-grid {
         padding: 10px;
     }
@@ -255,12 +255,12 @@
     }
 }
 
-/* Add smooth transitions for menu */
+/* transisi halus untuk menu */
 .nav-links {
     transition: all 0.3s ease-in-out;
 }
 
-/* Loading animation for product cards */
+/* animasi loading untuk produk menu */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -310,7 +310,7 @@
         display: block;
     }
 }
-/* Global Styles */
+/* model Global  */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
